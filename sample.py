@@ -2,7 +2,8 @@ import pickle
 import time
 import numpy as np
 
-max_ngrams = 3
+max_ngrams = 3 # ngram size
+num_generate = 10000 # number of passwords to generate
 
 # generate a single new password using a stats dict
 # created during the training phase 
@@ -27,14 +28,14 @@ def gen_char(ngram):
 		print('{} not in stats dict'.format(ngram))
 		return gen_char(ngram[0:-1])
 
-with open('data/train.{}.pickle'.format(max_ngrams)) as file:
+with open('data/{}-gram.pickle'.format(max_ngrams)) as file:
 	stats = pickle.load(file)
 
-start = time.time()
-for i in xrange(10000):
+# start = time.time()
+
+for i in xrange(num_generate):
 	pw = gen_password(stats, max_ngrams)
 	if pw is not None:
 		print(pw)
-		pass
 
-print('finished in {:.2f} seconds'.format(time.time() - start))
+# print('finished in {:.2f} seconds'.format(time.time() - start))

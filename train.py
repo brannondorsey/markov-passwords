@@ -40,6 +40,7 @@ with open('data/train.txt') as file:
 				# increment the statistic
 				stats[prev][nxt] += 1
 
+# convert frequency counts to probabilities
 for ngram in stats:
 	
 	chars = []
@@ -56,6 +57,7 @@ for ngram in stats:
 	for key, value in stats[ngram].items():
 		stats[ngram][key] = float(value) / float(total)
 
-with open('data/train.{}.pickle'.format(max_ngrams), 'wb') as file:
+# save ro
+with open('data/{}-gram.pickle'.format(max_ngrams), 'wb') as file:
 	pickle.dump(stats, file)
 		
